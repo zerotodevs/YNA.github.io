@@ -15,7 +15,7 @@
 }
 
 .doraemon-img {
-  width: 150px; /* Adjust size as needed */
+  width: 150px;
   height: auto;
   animation: puppyEyes 3s ease-in-out infinite;
   filter: drop-shadow(0 5px 15px rgba(163, 91, 126, 0.2));
@@ -277,7 +277,7 @@
     .letter-box.filled { background: var(--pink-pale); border-color: var(--pink-deep); transform: scale(1.05); }
     .letter-box.correct-letter { border-color: #4caf50; background: rgba(200,240,200,0.3); }
 
-    /* ── LETTER POOL (KEYBOARD REPLACEMENT) ── */
+    /* ── LETTER POOL ── */
     .letter-pool {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -332,7 +332,20 @@
       box-shadow: 0 12px 50px rgba(163,91,126,0.14);
       max-height: 88vh; overflow-y: auto;
     }
-    .unlock-word { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--pink-mid); margin: 10px 0; }
+    .success-modal .modal-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; color: var(--pink-deep);
+      margin-bottom: 6px;
+    }
+    .success-modal .modal-card p {
+      font-size: 0.93rem; color: var(--text-dark);
+      line-height: 1.85; text-align: left; margin-bottom: 10px;
+    }
+    .unlock-word {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--pink-mid); margin: 10px 0 16px;
+    }
 
     /* Burst */
     .burst { position: fixed; pointer-events: none; z-index: 300; }
@@ -363,16 +376,20 @@
     </div>
   </nav>
 
+  <!-- SCREEN 1: WELCOME -->
   <div class="screen active" id="screen-welcome">
     <div class="card">
       <span class="card-tag">The Quest</span>
       <h1>Welcome to the Quest, Yna.</h1>
       <div class="divider"></div>
+      <p>Play, answer the questions, and have fun.</p>
       <p>There are three levels waiting for you — each one holds something real.</p>
+      <p>Let's see what's waiting for you at the end.</p>
       <button class="btn-primary" onclick="goTo('screen-trivia')">Let's Start</button>
     </div>
   </div>
 
+  <!-- SCREEN 2: TRIVIA -->
   <div class="screen" id="screen-trivia">
     <div class="card">
       <span class="card-tag">Before we begin</span>
@@ -391,16 +408,21 @@
     </div>
   </div>
 
+  <!-- SCREEN 3: TRIVIA PASS -->
   <div class="screen" id="screen-trivia-pass">
     <div class="card">
       <span class="card-tag">Correct!</span>
-      <h1>Memory check passed.</h1>
+      <h1>You thought it right.</h1>
       <div class="divider"></div>
-      <p>Now let's go somewhere deeper.</p>
+      <p>Memory check passed. Now let's go somewhere deeper.</p>
+      <p style="font-size:0.85rem;color:var(--pink-deep);font-weight:600;margin-top:8px;">
+        Three levels ahead. Each one means something.
+      </p>
       <button class="btn-primary" onclick="goTo('screen-l1')">Next Level</button>
     </div>
   </div>
 
+  <!-- SCREEN 4: LEVEL 1 -->
   <div class="screen" id="screen-l1">
     <div class="card">
       <div class="progress-wrap">
@@ -408,19 +430,20 @@
         <div class="progress-track"><div class="progress-fill" style="width:33%"></div></div>
       </div>
       <span class="card-tag">4 Pics, 1 Word</span>
-      <p class="hint-text">To SEE something small that others might miss.</p>
+      <p class="hint-text">Hint: To SEE something small that others might miss.</p>
       <div class="pics-grid">
-  <div class="pic-cell"><img src="level1a.jpg" alt="Hint 1"></div>
-  <div class="pic-cell"><img src="level1b.jpg" alt="Hint 2"></div>
-  <div class="pic-cell"><img src="level1c.jpg" alt="Hint 3"></div>
-  <div class="pic-cell"><img src="level1d.jpg" alt="Hint 4"></div>
-</div>
+        <div class="pic-cell"><img src="level1a.jpg" alt="Hint 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level1a.jpg</div></div>
+        <div class="pic-cell"><img src="level1b.jpg" alt="Hint 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level1b.jpg</div></div>
+        <div class="pic-cell"><img src="level1c.jpg" alt="Hint 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level1c.jpg</div></div>
+        <div class="pic-cell"><img src="level1d.jpg" alt="Hint 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level1d.jpg</div></div>
+      </div>
       <div class="letter-row" id="letters-l1"></div>
       <p class="err-msg" id="err-l1"></p>
       <div class="letter-pool" id="pool-l1"></div>
     </div>
   </div>
 
+  <!-- SCREEN 5: LEVEL 2 -->
   <div class="screen" id="screen-l2">
     <div class="card">
       <div class="progress-wrap">
@@ -428,19 +451,20 @@
         <div class="progress-track"><div class="progress-fill" style="width:66%"></div></div>
       </div>
       <span class="card-tag">4 Pics, 1 Word</span>
-      <p class="hint-text">A PLACE where you feel safe.</p>
+      <p class="hint-text">Hint: A PLACE where you feel safe.</p>
       <div class="pics-grid">
-  <div class="pic-cell"><img src="level2a.jpg" alt="Hint 1"></div>
-  <div class="pic-cell"><img src="level2b.jpg" alt="Hint 2"></div>
-  <div class="pic-cell"><img src="level2c.jpg" alt="Hint 3"></div>
-  <div class="pic-cell"><img src="level2d.jpg" alt="Hint 4"></div>
-</div>
+        <div class="pic-cell"><img src="level2a.jpg" alt="Hint 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level2a.jpg</div></div>
+        <div class="pic-cell"><img src="level2b.jpg" alt="Hint 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level2b.jpg</div></div>
+        <div class="pic-cell"><img src="level2c.jpg" alt="Hint 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level2c.jpg</div></div>
+        <div class="pic-cell"><img src="level2d.jpg" alt="Hint 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level2d.jpg</div></div>
+      </div>
       <div class="letter-row" id="letters-l2"></div>
       <p class="err-msg" id="err-l2"></p>
       <div class="letter-pool" id="pool-l2"></div>
     </div>
   </div>
 
+  <!-- SCREEN 6: LEVEL 3 -->
   <div class="screen" id="screen-l3">
     <div class="card">
       <div class="progress-wrap">
@@ -448,58 +472,108 @@
         <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
       </div>
       <span class="card-tag">4 Pics, 1 Word</span>
-      <p class="hint-text">To PICK one, even when there are many options.</p>
+      <p class="hint-text">Hint: To PICK one, even when there are many options.</p>
       <div class="pics-grid">
-  <div class="pic-cell"><img src="level3a.jpg" alt="Hint 1"></div>
-  <div class="pic-cell"><img src="level3b.jpg" alt="Hint 2"></div>
-  <div class="pic-cell"><img src="level3c.jpg" alt="Hint 3"></div>
-  <div class="pic-cell"><img src="level3d.jpg" alt="Hint 4"></div>
-</div>
+        <div class="pic-cell"><img src="level3a.jpg" alt="Hint 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level13a.jpg</div></div>
+        <div class="pic-cell"><img src="level3b.jpg" alt="Hint 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level3b.jpg</div></div>
+        <div class="pic-cell"><img src="level3c.jpg" alt="Hint 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level13c.jpg</div></div>
+        <div class="pic-cell"><img src="level3d.jpg" alt="Hint 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="pic-fallback">level13d.jpg</div></div>
+      </div>
       <div class="letter-row" id="letters-l3"></div>
       <p class="err-msg" id="err-l3"></p>
       <div class="letter-pool" id="pool-l3"></div>
     </div>
   </div>
 
+  <!-- SCREEN 7: FINAL -->
   <div class="screen" id="screen-final">
-  <div class="card">
-    <span class="card-tag">Quest Complete</span>
-    <h1>Quest Complete!</h1>
-    <div class="divider"></div>
-    <p class="body-text" style="font-weight:700; color:var(--pink-deep); font-size:1.1rem; text-align:center;">
-      I just want to ask — may I court you, Yna?
-    </p>
-
-    <div class="doraemon-container">
-      <img src="doraemon.png" class="doraemon-img" alt="Cute Doraemon">
+    <div class="card">
+      <span class="card-tag">Quest Complete</span>
+      <h1>You successfully completed the quest.</h1>
+      <div class="divider"></div>
+      <p>And now you're still here.</p>
+      <p>I just want you to know that I don't want you to feel rushed or pressured. Just take your time, this time.</p>
+      <p style="font-weight:700; color:var(--pink-deep); font-size:1.05rem; margin-top:10px;">
+        I just want to ask &mdash; may I court you, Yna?
+      </p>
+      <p style="font-style:italic; color:var(--text-muted); font-size:0.88rem; margin-top:10px;">
+        Message your response in 10 minutes to add a little thrill.
+      </p>
+      <div class="doraemon-container">
+        <img src="doraemon.png" class="doraemon-img" alt="Cute Doraemon">
+      </div>
     </div>
-    </div>
-</div>
+  </div>
 
+  <!-- MODAL: LEVEL 1 -->
   <div class="success-modal" id="modal-l1">
     <div class="modal-card">
+      <span class="card-tag">Level 1 Unlocked</span>
       <h2>Galing galing, Love!</h2>
       <div class="unlock-word">NOTICE</div>
-      <p>Did you know I really notice your kakulitan right after I replied from your "Hi". It was funny na I notice na gasmile na ko sa messages nimo.</p>
+      <div class="divider"></div>
+      <p>
+        Did you know I really notice your kakulitan right after I replied from your "Hi".
+        It was funny ha na isa ka adlaw I notice na gasmile na ko sa mga messages nimo,
+        na gaexcited nako mag online para mamessage ka, ug na you are something special
+        na for me.
+      </p>
+      <p>
+        My task for you is to proceed to see what's waiting for you.
+      </p>
       <button class="btn-primary" onclick="closeModal('modal-l1'); goTo('screen-l2')">Next Level</button>
     </div>
   </div>
 
+  <!-- MODAL: LEVEL 2 -->
   <div class="success-modal" id="modal-l2">
     <div class="modal-card">
+      <span class="card-tag">Level 2 Unlocked</span>
       <h2>Congratss, palangga!</h2>
       <div class="unlock-word">HOME</div>
-      <p>You're really my home. I feel so safe, secure, and at peace whenever I talked to you.</p>
+      <div class="divider"></div>
+      <p>
+        You're really my home. I feel so safe, secure, and at peace whenever I talked
+        to you, love. Never naging lisod ang pag open up sa imo kay grabe ka muvalidate
+        ug feeling. You never just listen but also understands me.
+      </p>
+      <p>
+        Thank you for making me feel this way, palangga. Feeling na ginawish lang nako
+        before tas karon ginapakita lang nimo naturally.
+      </p>
+      <p>
+        Yeppp, this is not yet the end &mdash; proceed to the next level, love, gogogogo!
+      </p>
       <button class="btn-primary" onclick="closeModal('modal-l2'); goTo('screen-l3')">Next Level</button>
     </div>
   </div>
 
+  <!-- MODAL: LEVEL 3 -->
   <div class="success-modal" id="modal-l3">
     <div class="modal-card">
+      <span class="card-tag">Level 3 Unlocked</span>
       <h2>You nailed it, love.</h2>
       <div class="unlock-word">CHOOSE</div>
-      <p>Out of everyone, I will CHOOSE you always. I will choose not only you but also this relationship.</p>
-      <button class="btn-primary" onclick="closeModal('modal-l3'); goTo('screen-final')">Final Step</button>
+      <div class="divider"></div>
+      <p>
+        Out of everyone, I will CHOOSE you always. I will choose not only you but
+        also this relationship. It was not something rushed or something forced.
+        Nag grow sya quietly in the way I look forward talking to you, in the way
+        maremember tika sa gamay na butang, in the way na mahimo nako ang butang naturally.
+      </p>
+      <p>
+        This is not just for "fun fun lang" na pagtuo nako at first but this is
+        something deeper na. The willingness to be with you, to understand you,
+        to listen to you, and to help you is always a choice.
+      </p>
+      <p>
+        Choosing you is not just about this day, about this moment, but it's about
+        choosing you even in hard times, even in just ordinary days, and even in quiet moments.
+      </p>
+      <p style="font-weight:700; color:var(--pink-deep); font-size:1rem; text-align:center; margin-top:8px;">
+        I WILL CHOOSE YOU, SHAINA.
+      </p>
+      <button class="btn-primary" onclick="closeModal('modal-l3'); goTo('screen-final')">Next</button>
     </div>
   </div>
 
@@ -531,14 +605,15 @@
       const now = new Date();
       const today = String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + String(now.getFullYear()).slice(-2);
       
-      if(q1 === '012726' && q2 === today) {
+      if (q1 === '012726' && q2 === today) {
         goTo('screen-trivia-pass');
       } else {
         document.getElementById('trivia-err').textContent = "That's not quite right. Check the dates!";
         document.querySelector('#screen-trivia .card').classList.add('shake');
-        setTimeout(()=> document.querySelector('#screen-trivia .card').classList.remove('shake'), 400);
+        setTimeout(() => document.querySelector('#screen-trivia .card').classList.remove('shake'), 400);
       }
     }
+
     const levels = [
       { id: 'l1', word: 'NOTICE', modal: 'modal-l1' },
       { id: 'l2', word: 'HOME',   modal: 'modal-l2' },
@@ -553,17 +628,16 @@
 
       let poolArr = lvl.word.split('');
       const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      while(poolArr.length < 10) {
+      while (poolArr.length < 10) {
         let r = alphabet[Math.floor(Math.random()*26)];
         poolArr.push(r);
       }
-      poolArr.sort(() => Math.random() - 0.5); 
+      poolArr.sort(() => Math.random() - 0.5);
 
       for (let i = 0; i < wordLen; i++) {
         const box = document.createElement('div');
         box.className = 'letter-box';
         box.id = `${lvl.id}-box-${i}`;
-      
         box.onclick = () => removeLetter(lvl, i, typed);
         lrow.appendChild(box);
       }
@@ -582,10 +656,7 @@
       if (typed.length < lvl.word.length) {
         typed.push({ char, poolIdx });
         updateUI(lvl, typed);
-        
-        if (typed.length === lvl.word.length) {
-          checkAnswer(lvl, typed);
-        }
+        if (typed.length === lvl.word.length) checkAnswer(lvl, typed);
       }
     }
 
@@ -597,7 +668,6 @@
     }
 
     function updateUI(lvl, typed) {
-    
       for (let i = 0; i < lvl.word.length; i++) {
         const box = document.getElementById(`${lvl.id}-box-${i}`);
         box.textContent = typed[i] ? typed[i].char : "";
@@ -605,7 +675,6 @@
       }
       const allPoolBtns = document.querySelectorAll(`#pool-${lvl.id} .pool-btn`);
       allPoolBtns.forEach(btn => btn.classList.remove('used'));
-      
       typed.forEach(item => {
         document.getElementById(`${lvl.id}-pool-${item.poolIdx}`).classList.add('used');
       });
@@ -621,7 +690,7 @@
         document.getElementById('err-'+lvl.id).textContent = "Try again, love!";
         setTimeout(() => {
           lrow.classList.remove('shake');
-          typed.length = 0; 
+          typed.length = 0;
           updateUI(lvl, typed);
           document.getElementById('err-'+lvl.id).textContent = "";
         }, 800);
