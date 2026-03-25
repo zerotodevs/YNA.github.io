@@ -13,7 +13,6 @@
       --pink-soft:  #fbcfe8; 
       --pink-pale:  #fce4ec;
       --bg-cream:   #F8F1E7; 
-      --nav-h: 80px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,7 +62,7 @@
       font-size: 1rem;
       transition: 0.3s;
     }
-    .nav-pill a:hover { color: white; }
+    .nav-pill a:hover { color: var(--pink-deep); }
 
     .petal {
       position: fixed;
@@ -86,6 +85,7 @@
       margin: 60px auto;
       padding: 0 50px;
       position: relative;
+      z-index: 5;
     }
 
     .hero-left {
@@ -133,28 +133,19 @@
       box-shadow: 0 8px 20px rgba(163, 91, 126, 0.2);
     }
 
-    .deco-butterfly {
+    .butterfly {
       position: absolute;
-      width: 120px;
-      z-index: 2;
-      opacity: 0.8;
+      font-size: 2.2rem;
       animation: float 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 2;
     }
-    .butterfly-1 { bottom: -20px; left: -40px; }
-    .butterfly-2 { top: -20px; right: 50px; transform: rotate(15deg); }
-    
-    .deco-leaf {
-      position: absolute;
-      width: 250px;
-      bottom: -100px;
-      left: 150px;
-      opacity: 0.15;
-      z-index: 1;
-    }
+    .butterfly-1 { bottom: -20px; left: -10px; }
+    .butterfly-2 { top: -20px; right: 30px; animation-delay: 1s; }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-15px) rotate(5deg); }
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50%       { transform: translateY(-15px) rotate(5deg); }
     }
 
     .hero-right {
@@ -167,19 +158,45 @@
     .img-row {
       display: flex;
       gap: 20px;
+      position: relative;
     }
+
     .img-placeholder {
       width: 160px;
       height: 160px;
       background-color: white;
       border-radius: 25px;
       border: 3px solid var(--pink-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+      transition: transform .25s, box-shadow .25s;
     }
+    .img-placeholder:hover {
+      transform: scale(1.04) rotate(-1deg);
+      box-shadow: 0 14px 28px rgba(163,91,126,0.18);
+    }
+    .img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* shown when image file is missing */
+    .img-placeholder .fallback {
+      width: 100%; height: 100%;
+      display: none;
+      align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--pink-pale), var(--pink-soft));
+      color: var(--pink-deep);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 12px;
+    }
+    .img-placeholder .fallback span { font-size: 2rem; }
+
     .hero-desc {
       max-width: 350px;
       font-size: 0.9rem;
@@ -188,10 +205,20 @@
       text-align: right;
     }
 
-    /* Responsive */
+    /* subtle bg deco */
+    .deco {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+      font-size: 1.8rem;
+      animation: float 6s ease-in-out infinite;
+    }
+
     @media (max-width: 800px) {
-      .hero { flex-direction: column; text-align: center; }
+      .hero { flex-direction: column; text-align: center; padding: 0 24px; }
       .hero-desc { text-align: center; margin-top: 20px; }
+      .img-row { flex-wrap: wrap; justify-content: center; }
       .butterfly-2 { display: none; }
     }
   </style>
@@ -199,6 +226,11 @@
 <body>
 
   <div id="petals"></div>
+
+  <span class="deco" style="top:15%;left:5%;animation-delay:0s">🌸</span>
+  <span class="deco" style="top:40%;right:4%;animation-delay:1.5s">🌷</span>
+  <span class="deco" style="bottom:20%;left:8%;animation-delay:3s">💗</span>
+  <span class="deco" style="bottom:35%;right:6%;animation-delay:2s">✨</span>
 
   <div class="top-banner">
     See how your Debi values you!
@@ -214,49 +246,54 @@
   </nav>
 
   <main class="hero" id="home">
-    <img src="https://cdn-icons-png.flaticon.com/512/3570/3570159.png" class="deco-leaf" alt="leaf decoration">
 
     <div class="hero-left">
-      <p class="hero-question">Who’s debi’s plot twist?</p>
-      <h1 class="hero-name">It’s you!<br><span>YANI</span></h1>
-      <a href="#quest" class="explore-btn">Explore</a>
-      
-      <img src="https://cdn-icons-png.flaticon.com/512/590/590772.png" class="deco-butterfly butterfly-1" alt="butterfly">
+      <p class="hero-question">Who's debi's plot twist?</p>
+      <h1 class="hero-name">It's you!<br><span>YANI</span></h1>
+      <a href="#quest" class="explore-btn">Explore 🌷</a>
+      <span class="butterfly butterfly-1">🦋</span>
     </div>
 
     <div class="hero-right">
-      <div class="img-row" style="position: relative;">
-        <img src="https://cdn-icons-png.flaticon.com/512/590/590772.png" class="deco-butterfly butterfly-2" alt="butterfly">
-        
-        <div class="img-placeholder">🌸</div>
-        <div class="img-placeholder">📸</div>
+      <div class="img-row">
+        <span class="butterfly butterfly-2">🦋</span>
+
+        <div class="img-placeholder">
+          <img src="yna1.jpg" alt="Yani"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <div class="fallback"><span>📷</span>yna1.jpg</div>
+        </div>
+
+        <div class="img-placeholder">
+          <img src="yna1.jpg" alt="Yani"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <div class="fallback"><span>📷</span>yna2.jpg</div>
+        </div>
       </div>
+
       <p class="hero-desc">
-       This little world was made just for you. Play through the quests, unlock the music, and discover something special waiting at the end. Every level is a piece of what Debi wants to say.
+        This little world was made just for you. Play through the quests,
+        unlock the music, and discover something special waiting at the end.
+        Every level is a piece of what Debi wants to say. 💕
       </p>
     </div>
+
   </main>
 
   <script>
     const petalContainer = document.getElementById('petals');
-    const petalEmojis = ['🌸', '🌷', '💗', '✨', '🌺', '🦋', '🦋'];
+    const petalEmojis = ['🌸', '🌷', '💗', '✨', '🌺', '🦋'];
 
     function createPetal() {
       const petal = document.createElement('div');
       petal.className = 'petal';
       petal.innerText = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
-      
       petal.style.left = Math.random() * 100 + 'vw';
       petal.style.fontSize = Math.random() * (1.5 - 0.8) + 0.8 + 'rem';
-      
       const duration = Math.random() * (10 - 5) + 5;
       petal.style.animationDuration = duration + 's';
-      
       petalContainer.appendChild(petal);
-
-      setTimeout(() => {
-        petal.remove();
-      }, duration * 1000);
+      setTimeout(() => petal.remove(), duration * 1000);
     }
 
     setInterval(createPetal, 400);
