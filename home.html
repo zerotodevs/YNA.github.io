@@ -1,46 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>See How Your Debi Values You</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>See How Debi Values You 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink-deep:  #c2185b;
+      --pink-mid:   #e91e8c;
+      --pink-soft:  #f48fb1;
+      --pink-pale:  #fce4ec;
+      --pink-blush: #fff0f5;
+      --pink-rose:  #f8bbd0;
+      --pink-muted: #b06080;
+      --nav-h: 70px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--pink-blush);
+      color: #4a1030;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(244,143,177,.25);
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; z-index: 50;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--pink-muted);
+      font-weight: 600;
+      font-size: .95rem;
+      padding: 8px 18px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+    nav a:hover, nav a.active {
+      background: var(--pink-pale);
+      color: var(--pink-deep);
+    }
+
+    /* ── PETALS BG ── */
+    .petal {
+      position: fixed; opacity: 0;
+      animation: fall linear infinite;
+      pointer-events: none; user-select: none;
+      z-index: 0;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: .6; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-left: 50px; padding-right: 50px;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--pink-muted);
+      margin-bottom: 5px;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--pink-muted);
+      line-height: 1.8;
+      max-width: 380px;
+      margin-bottom: 30px;
+    }
+
+    .explore-btn {
+      display: inline-flex; align-items: center;
+      background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      color: #fff; border: none; border-radius: 50px;
+      padding: 15px 35px; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 6px 20px rgba(194,24,91,.2);
+      transition: 0.3s;
+    }
+    .explore-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(194,24,91,.3); }
+
+    .hero-right {
+      display: flex; flex-wrap: wrap; gap: 15px;
+      justify-content: center;
+    }
+    .img-card {
+      border-radius: 25px;
+      background: linear-gradient(135deg, var(--pink-rose), var(--pink-pale));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+    .img-card:hover { transform: scale(1.05) rotate(-2deg); }
+    .img-card:nth-child(1), .img-card:nth-child(2) { width: 180px; height: 180px; }
+    .img-card:nth-child(3) { width: 100%; height: 120px; font-size: 2rem; }
+
+    /* ── SECTIONS ── */
+    #quest { padding: 100px 20px; text-align: center; }
+    .section-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 25px; max-width: 1000px; margin: 40px auto;
+    }
+    .s-card {
+      background: white; border-radius: 25px; padding: 40px 25px;
+      box-shadow: 0 10px 30px rgba(194,24,91,.05);
+      transition: 0.3s;
+    }
+    .s-card:hover { transform: translateY(-10px); }
+    .badge {
+      display: inline-block; margin-top: 15px;
+      background: var(--pink-pale); color: var(--pink-deep);
+      padding: 5px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
+    }
+
+    footer { padding: 40px; text-align: center; color: var(--pink-soft); font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 120px; }
+      .hero-desc { margin: 0 auto 30px; }
+      .hero-right { display: none; }
+      .section-cards { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-    <header class="top-banner">
-        SEE HOW YOUR DEBI VALUES YOU!
-    </header>
+  <div id="petals"></div>
 
-    <nav class="navbar-container">
-        <div class="navbar-pill">
-            <a href="#">Home</a>
-            <a href="#">Music</a>
-            <a href="#">Quest</a>
-            <a href="#">Profile</a>
-        </div>
-    </nav>
+  <nav>
+    <a href="#home" class="active">Home</a>
+    <a href="#music">Music</a>
+    <a href="#quest">Quest</a>
+    <a href="#profile">Profile</a>
+  </nav>
 
-    <main class="content-wrapper">
-        <div class="hero-section">
-            <div class="text-content">
-                <h3>Who’s debi’s plot twist?</h3>
-                <h1 class="fancy-title">It’s you! <br> <span>YANI</span></h1>
-                <button class="explore-btn">Explore</button>
-            </div>
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <p class="hero-question">Who's Debi's plot twist?</p>
+      <h1 class="hero-name">It's you! <br> YANI 🌸</h1>
+      <p class="hero-desc">
+        This world was built just for you. Explore the quests, listen to the music, 
+        and find the special message Debi left at the very end. 💕
+      </p>
+      <a class="explore-btn" href="#quest">Start Exploring ✨</a>
+    </div>
 
-            <div class="visual-content">
-                <div class="image-grid">
-                    <div class="image-placeholder"></div>
-                    <div class="image-placeholder"></div>
-                </div>
-                <p class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod condimentum ligula, eu dignissim lorem mattis ultricies. Aenean a metus turpis.
-                </p>
-            </div>
-        </div>
-    </main>
+    <div class="hero-right">
+      <div class="img-card">🌸</div>
+      <div class="img-card">📸</div>
+      <div class="img-card">💗 &nbsp; 🦋 &nbsp; 🌷 &nbsp; ✨</div>
+    </div>
+  </section>
 
+  <section id="quest">
+    <h2 style="font-family: 'Playfair Display'; color: var(--pink-deep); font-size: 2rem;">Current Quests</h2>
+    <div class="section-cards">
+      <div class="s-card">
+        <h3>Level 1</h3>
+        <p>Fun trivia to break the ice. Light and silly.</p>
+        <span class="badge">Unlocked 🔓</span>
+      </div>
+      <div class="s-card">
+        <h3>Level 2</h3>
+        <p>4 Pics, 1 Word. Guess what Debi is thinking.</p>
+        <span class="badge">Coming Soon 🔒</span>
+      </div>
+      <div class="s-card">
+        <h3>Level 3</h3>
+        <p>The final level. Something real is waiting.</p>
+        <span class="badge">Coming Soon 🔒</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Made with <span>💗</span> by Debi — just for Yani
+  </footer>
+
+  <script>
+    const pw = document.getElementById('petals');
+    ['🌸','🌺','💮','🌷','💗'].forEach(e => {
+      for (let j = 0; j < 3; j++) {
+        const p = document.createElement('div'); p.className = 'petal';
+        p.textContent = e;
+        p.style.left = Math.random()*100+'vw';
+        p.style.animationDuration = (6+Math.random()*9)+'s';
+        p.style.animationDelay = (Math.random()*10)+'s';
+        pw.appendChild(p);
+      }
+    });
+  </script>
 </body>
 </html>
