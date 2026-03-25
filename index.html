@@ -1,695 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day YNA! 💕</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Yani Only 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink-deep:   #c2185b;
+      --pink-mid:    #e91e8c;
+      --pink-soft:   #f48fb1;
+      --pink-pale:   #fce4ec;
+      --pink-blush:  #fff0f5;
+      --pink-rose:   #f8bbd0;
+    }
 
-        body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #FFB6C1 0%, #FFD1DC 50%, #FFC0CB 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .container {
-            background: white;
-            padding: 50px 40px;
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(255, 182, 193, 0.4);
-            max-width: 700px;
-            width: 100%;
-            border: 3px solid #FFB6C1;
-        }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff0f5 0%, #fce4ec 40%, #f8bbd0 100%);
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
 
-        /* Password Page */
-        .password-page {
-            text-align: center;
-        }
+    .petal {
+      position: fixed;
+      opacity: 0;
+      animation: fall linear infinite;
+      pointer-events: none;
+      user-select: none;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(110vh)  rotate(360deg); opacity: 0; }
+    }
 
-        .password-page h1 {
-            color: #FF69B4;
-            font-size: 2.8em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
-        }
+    .card {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(244,143,177,0.35);
+      border-radius: 32px;
+      padding: 56px 52px 48px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(194,24,91,.10), 0 2px 8px rgba(194,24,91,.06);
+      position: relative;
+      z-index: 10;
+      animation: popIn .7s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(.85) translateY(30px); opacity: 0; }
+      to   { transform: scale(1)   translateY(0);    opacity: 1; }
+    }
 
-        .password-page .heart {
-            font-size: 5em;
-            margin: 20px 0;
-            animation: heartbeat 1.5s infinite;
-        }
+    .lock-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      display: block;
+      animation: wiggle 2.5s ease-in-out infinite;
+    }
+    @keyframes wiggle {
+      0%,100% { transform: rotate(-6deg); }
+      50%      { transform: rotate(6deg); }
+    }
 
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
+    .card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      color: var(--pink-deep);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .card h1 em { color: var(--pink-mid); font-style: italic; }
 
-        .password-page p {
-            font-size: 1.3em;
-            color: #D8487A;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
+    .subtitle {
+      font-size: 0.92rem;
+      color: #b06080;
+      margin-bottom: 32px;
+      font-weight: 500;
+    }
 
-        .password-page input {
-            width: 220px;
-            padding: 18px;
-            font-size: 1.3em;
-            text-align: center;
-            border: 3px solid #FFB6C1;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            background: #FFF0F5;
-            color: #FF69B4;
-            font-weight: bold;
-        }
+    .dots-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .dot-box {
+      width: 54px; height: 64px;
+      background: rgba(252,228,236,0.7);
+      border: 2px solid var(--pink-rose);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      color: var(--pink-deep);
+      font-family: 'Playfair Display', serif;
+      transition: border-color .2s, background .2s, transform .15s;
+    }
+    .dot-box.filled  { background: var(--pink-pale); border-color: var(--pink-mid); transform: scale(1.06); }
+    .dot-box.active  { border-color: var(--pink-deep); box-shadow: 0 0 0 3px rgba(194,24,91,.15); }
 
-        .password-page input:focus {
-            outline: none;
-            border-color: #FF69B4;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
-        }
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 240px;
+      margin: 0 auto 24px;
+    }
+    .key {
+      background: rgba(255,255,255,0.8);
+      border: 1.5px solid var(--pink-rose);
+      border-radius: 14px;
+      padding: 14px 0;
+      font-size: 1.2rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      color: var(--pink-deep);
+      cursor: pointer;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      user-select: none;
+    }
+    .key:hover  { background: var(--pink-pale); box-shadow: 0 4px 12px rgba(194,24,91,.12); }
+    .key:active { transform: scale(.94); }
+    .key.del    { font-size: 1rem; }
+    .key.zero   { grid-column: 2; }
 
-        .password-page button {
-            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
-            color: white;
-            border: none;
-            padding: 18px 50px;
-            font-size: 1.2em;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: bold;
-            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
-        }
+    .shake { animation: shake .4s cubic-bezier(.36,.07,.19,.97) both; }
+    @keyframes shake {
+      10%,90% { transform: translateX(-4px); }
+      30%,70% { transform: translateX(6px); }
+      50%     { transform: translateX(-4px); }
+    }
 
-        .password-page button:hover {
-            background: linear-gradient(135deg, #FF1493, #FF69B4);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
-        }
+    .msg { font-size: .85rem; min-height: 20px; color: var(--pink-deep); font-weight: 600; }
 
-        .error-message {
-            color: #FF1493;
-            font-weight: bold;
-            margin-top: 20px;
-            font-size: 1.15em;
-            background: #FFF0F5;
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid #FFB6C1;
-        }
+    .success-overlay {
+      position: fixed; inset: 0;
+      background: rgba(252,228,236,.95);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 100;
+      opacity: 0; pointer-events: none;
+      transition: opacity .5s;
+    }
+    .success-overlay.show { opacity: 1; pointer-events: all; }
+    .success-overlay .big { font-size: 5rem; margin-bottom: 16px; animation: bounce .6s ease infinite alternate; }
+    @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+    .success-overlay p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--pink-deep);
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .enter-btn {
+      background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      color: #fff; border: none; border-radius: 50px;
+      padding: 14px 40px; font-size: 1rem;
+      font-family: 'Quicksand', sans-serif; font-weight: 700;
+      cursor: pointer; letter-spacing: .04em;
+      box-shadow: 0 6px 20px rgba(194,24,91,.3);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .enter-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(194,24,91,.35); }
 
-        /* Welcome Modal */
-        .welcome-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 182, 193, 0.95);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .welcome-content {
-            background: white;
-            padding: 60px 50px;
-            border-radius: 25px;
-            text-align: center;
-            animation: slideIn 0.6s;
-            border: 4px solid #FF69B4;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-100px) scale(0.8); opacity: 0; }
-            to { transform: translateY(0) scale(1); opacity: 1; }
-        }
-
-        .welcome-content h2 {
-            color: #FF69B4;
-            font-size: 3em;
-            margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
-        }
-
-        .welcome-content p {
-            font-size: 1.5em;
-            color: #D8487A;
-            font-weight: 500;
-        }
-
-        .sparkle {
-            font-size: 3em;
-            margin: 15px 0;
-        }
-
-        /* Main Page */
-        .main-page {
-            display: none;
-        }
-
-        .main-page h1 {
-            color: #FF69B4;
-            text-align: center;
-            margin-bottom: 35px;
-            font-size: 2.8em;
-            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
-        }
-
-        .modules {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .module-btn {
-            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
-            color: white;
-            border: 3px solid #FF69B4;
-            padding: 45px 20px;
-            font-size: 1.4em;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.4);
-            font-weight: bold;
-        }
-
-        .module-btn:hover {
-            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 12px 35px rgba(255, 105, 180, 0.5);
-        }
-
-        .module-btn span {
-            display: block;
-            font-size: 2.5em;
-            margin-bottom: 12px;
-        }
-
-        /* Module Content */
-        .module-content {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .module-content h2 {
-            color: #FF69B4;
-            margin-bottom: 25px;
-            font-size: 2.3em;
-            text-align: center;
-            text-shadow: 1px 1px 3px rgba(255, 182, 193, 0.3);
-        }
-
-        .module-content p {
-            color: #D8487A;
-            line-height: 1.9;
-            font-size: 1.15em;
-            margin-bottom: 18px;
-            text-align: justify;
-        }
-
-        .back-btn {
-            background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
-            color: white;
-            border: 2px solid #FF69B4;
-            padding: 14px 35px;
-            font-size: 1.1em;
-            border-radius: 12px;
-            cursor: pointer;
-            margin-top: 25px;
-            transition: all 0.3s;
-            font-weight: bold;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .back-btn:hover {
-            background: linear-gradient(135deg, #FF69B4, #FFB6C1);
-            transform: translateY(-3px);
-        }
-
-        /* Music Player */
-        .music-section {
-            background: #FFF0F5;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-            border: 2px solid #FFB6C1;
-        }
-
-        .music-section h3 {
-            color: #FF69B4;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            text-align: center;
-        }
-
-        .song-item {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 15px 0;
-            border: 2px solid #FFD1DC;
-            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
-        }
-
-        .song-item h4 {
-            color: #FF69B4;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-
-        .song-item p {
-            color: #D8487A;
-            font-size: 1em;
-            margin-bottom: 15px;
-        }
-
-        .spotify-embed {
-            width: 100%;
-            height: 152px;
-            border-radius: 12px;
-            margin-top: 10px;
-        }
-
-        /* Flower Canvas */
-        .flower-container {
-            text-align: center;
-            margin: 30px 0;
-            background: #FFF0F5;
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid #FFB6C1;
-        }
-
-        #flowerCanvas {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
-        }
-
-        /* Reminder */
-        .reminder-list {
-            background: #FFF0F5;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 25px;
-            border: 2px solid #FFB6C1;
-        }
-
-        .reminder-list ul {
-            list-style: none;
-        }
-
-        .reminder-list li {
-            color: #D8487A;
-            font-size: 1.25em;
-            margin: 20px 0;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            border-left: 5px solid #FF69B4;
-            box-shadow: 0 3px 10px rgba(255, 182, 193, 0.2);
-            transition: all 0.3s;
-        }
-
-        .reminder-list li:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 600px) {
-            .modules {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 30px 20px;
-            }
-
-            .password-page h1,
-            .main-page h1 {
-                font-size: 2em;
-            }
-
-            .module-btn {
-                padding: 35px 15px;
-                font-size: 1.2em;
-            }
-        }
-    </style>
+    .burst { position: fixed; pointer-events: none; z-index: 200; }
+    .burst span {
+      position: absolute; font-size: 1.5rem;
+      animation: burst-anim .9s ease forwards;
+    }
+    @keyframes burst-anim {
+      0%   { transform: translate(0,0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--tx),var(--ty)) scale(.3); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Password Page -->
-    <div id="passwordPage" class="container password-page">
-        <div class="heart">💕</div>
-        <h1>Special Access Required</h1>
-        <p>Are you YNA? Enter your special code:</p>
-        <input type="password" id="passwordInput" placeholder="####" maxlength="4">
-        <br>
-        <button onclick="checkPassword()">Enter ✨</button>
-        <div id="errorMessage" class="error-message hidden"></div>
+  <div id="petals"></div>
+
+  <div class="card" id="card">
+    <span class="lock-icon">🔒</span>
+    <h1>This is for <em>Yani</em> only.</h1>
+    <p class="subtitle">To verify, please enter our code:</p>
+
+    <div class="dots-row" id="dots">
+      <div class="dot-box active" id="d0"></div>
+      <div class="dot-box" id="d1"></div>
+      <div class="dot-box" id="d2"></div>
+      <div class="dot-box" id="d3"></div>
     </div>
 
-    <!-- Welcome Modal -->
-    <div id="welcomeModal" class="welcome-modal">
-        <div class="welcome-content">
-            <div class="sparkle">✨💕✨</div>
-            <h2>Welcome, my love!</h2>
-            <p>Enjoy your stay. 💖</p>
-            <div class="sparkle">✨💕✨</div>
-        </div>
+    <div class="numpad" id="numpad">
+      <button class="key" data-n="1">1</button>
+      <button class="key" data-n="2">2</button>
+      <button class="key" data-n="3">3</button>
+      <button class="key" data-n="4">4</button>
+      <button class="key" data-n="5">5</button>
+      <button class="key" data-n="6">6</button>
+      <button class="key" data-n="7">7</button>
+      <button class="key" data-n="8">8</button>
+      <button class="key" data-n="9">9</button>
+      <button class="key del" data-n="del">⌫</button>
+      <button class="key zero" data-n="0">0</button>
     </div>
 
-    <!-- Main Page -->
-    <div id="mainPage" class="container main-page">
-        <h1>💖 For YNA 💖</h1>
-        
-        <!-- Module Selection -->
-        <div id="moduleSelection" class="modules">
-            <button class="module-btn" onclick="showModule('letter')">
-                <span>💌</span>
-                Letter
-            </button>
-            <button class="module-btn" onclick="showModule('music')">
-                <span>🎵</span>
-                Music
-            </button>
-            <button class="module-btn" onclick="showModule('flower')">
-                <span>🌸</span>
-                Flower
-            </button>
-            <button class="module-btn" onclick="showModule('reminder')">
-                <span>💭</span>
-                Reminder
-            </button>
-        </div>
+    <p class="msg" id="msg"></p>
+  </div>
 
-        <!-- Letter Module -->
-        <div id="letterModule" class="module-content">
-            <h2>💌 My Letter to You</h2>
-            <p>Happy Valentine's Day, loveyyy ko!!! Be my valentineeee ha! Bawal mag dili dili dire. Pero kay layo man ka ani nalang sa love HAHAHAHA. Anyway, impromptu na ni so please bear with me hihi.</p>
-            
-            <p>Hey, Yna! How are you? Hope you're doing well every day, love. Really don't know your purpose sa akong kinabuhi, but instead of focusing on that I'm just enjoying it. Thank God I replied jud. Thank you for your life. For a little period of time, I've learned a lot from you. You're so brave and strong, love and yessss you deserve the besttt and I'm making myself better every day, not only for myself but also para naman ka deserve deserve mo uy hihi.</p>
-            
-            <p>If gaoverthink gyapon ka na basi magbago ko, no worries I'll assure you everyday that I won't. Ug unsa may makita o maobserve nimo kay tinuod na loveeyyy. I hope and pray pud na mag stay ka lang ug unsay may ginapakita nimo. From a sweet girl to a wild woman, love that girl!</p>
-            
-            <p style="text-align: center; color: #FF69B4; font-size: 1.3em; margin-top: 25px;"><em>Ara sa guro kay basi muhilak ka ba. Will update this one, soonnnnn!! 💕</em></p>
-            
-            <button class="back-btn" onclick="backToModules()">← Back to Modules</button>
-        </div>
+  <div class="success-overlay" id="success">
+    <div class="big">🌸</div>
+    <p>It's really you, Yani!<br><small style="font-size:1rem;color:#b06080">Welcome to your special place 💕</small></p>
+    <button class="enter-btn" onclick="window.location.href='home.html'">Enter ✨</button>
+  </div>
 
-        <!-- Music Module -->
-        <div id="musicModule" class="module-content">
-            <h2>🎵 Music That Reminds Me of You</h2>
-            
-            <div class="music-section">
-                <div class="song-item">
-                    <h4>🎶 Dito Sa'kin</h4>
-                    <p>by Earl Agustin</p>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/2XHJHkv6KrcZIr5TJLKOvd?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
+  <script>
+    // petals
+    const petalWrap = document.getElementById('petals');
+    ['🌸','🌺','💮','🌷','💗'].forEach((e,i) => {
+      for (let j = 0; j < 4; j++) {
+        const p = document.createElement('div');
+        p.className = 'petal'; p.textContent = e;
+        p.style.left = Math.random()*100+'vw';
+        p.style.fontSize = (.9+Math.random()*.7)+'rem';
+        p.style.animationDuration = (5+Math.random()*8)+'s';
+        p.style.animationDelay = (Math.random()*8)+'s';
+        petalWrap.appendChild(p);
+      }
+    });
 
-                <div class="song-item">
-                    <h4>🎶 Only Reminds Me Of You</h4>
-                    <p>by MYMP</p>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/3NbDpaHCdEOMCK9RiRGbLQ?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
-            
-            <p style="text-align: center; color: #FF69B4; margin-top: 20px; font-size: 1.2em;">💕 These songs make me think of you every time 💕</p>
-            
-            <button class="back-btn" onclick="backToModules()">← Back to Modules</button>
-        </div>
+    const SECRET = '2615';
+    let entered = '';
 
-        <!-- Flower Module -->
-        <div id="flowerModule" class="module-content">
-            <h2>🌸 A Bouquet for You</h2>
-            <!-- NEW CODE -->
-   <div class="flower-container">
-       <img src="spider-lily.jpg" alt="Pink Spider Lily Bouquet" style="max-width: 100%; height: auto; border-radius: 15px;">
-       <p style="color: #FF69B4; font-size: 1.3em; margin-top: 20px;">💕 Pink Spider Lily Bouquet just for you! 💕</p>
-   </div>
-            <button class="back-btn" onclick="backToModules()">← Back to Modules</button>
-        </div>
+    function updateDots() {
+      for (let i = 0; i < 4; i++) {
+        const d = document.getElementById('d'+i);
+        d.classList.toggle('filled', i < entered.length);
+        d.classList.toggle('active', i === entered.length);
+        d.textContent = i < entered.length ? '•' : '';
+      }
+    }
+    function push(n) {
+      if (entered.length >= 4) return;
+      entered += n; updateDots();
+      if (entered.length === 4) setTimeout(check, 200);
+    }
+    function del() {
+      entered = entered.slice(0,-1);
+      document.getElementById('msg').textContent = '';
+      updateDots();
+    }
+    function check() {
+      if (entered === SECRET) {
+        for (let i = 0; i < 10; i++) spawnBurst();
+        setTimeout(() => document.getElementById('success').classList.add('show'), 400);
+      } else {
+        const card = document.getElementById('card');
+        card.classList.add('shake');
+        document.getElementById('msg').textContent = '❌ Hmm, try again! Only Yani knows 💭';
+        setTimeout(() => { card.classList.remove('shake'); entered = ''; updateDots(); }, 500);
+      }
+    }
+    function spawnBurst() {
+      const b = document.createElement('div'); b.className = 'burst';
+      const cx = window.innerWidth/2, cy = window.innerHeight/2;
+      b.style.left = cx+'px'; b.style.top = cy+'px';
+      for (let i = 0; i < 8; i++) {
+        const s = document.createElement('span');
+        const a = (i/8)*360, d = 80+Math.random()*80;
+        s.style.setProperty('--tx', Math.cos(a*Math.PI/180)*d+'px');
+        s.style.setProperty('--ty', Math.sin(a*Math.PI/180)*d+'px');
+        s.style.animationDelay = Math.random()*.3+'s';
+        s.textContent = ['💗','💕','💖','🌸'][i%4];
+        b.appendChild(s);
+      }
+      document.body.appendChild(b);
+      setTimeout(() => b.remove(), 1200);
+    }
 
-        <!-- Reminder Module -->
-        <div id="reminderModule" class="module-content">
-            <h2>💭 Reminders for You</h2>
-            <div class="reminder-list">
-                <ul>
-                    <li>💕 <strong>Take care always</strong> - Your health and happiness matter most to me</li>
-                    <li>📚 <strong>Learn something new everyday</strong> - Keep growing and exploring the world</li>
-                    <li>😊 <strong>Do what makes you happy</strong> - Life is too short not to enjoy every moment</li>
-                </ul>
-            </div>
-            <p style="text-align: center; color: #FF69B4; font-size: 1.2em; margin-top: 25px;">Always remember how special you are! 💖</p>
-            <button class="back-btn" onclick="backToModules()">← Back to Modules</button>
-        </div>
-    </div>
-
-    <script>
-        function checkPassword() {
-            const password = document.getElementById('passwordInput').value;
-            const errorMessage = document.getElementById('errorMessage');
-            
-            if (password === '2165') {
-                // Correct password
-                document.getElementById('passwordPage').classList.add('hidden');
-                errorMessage.classList.add('hidden');
-                
-                // Show welcome modal
-                const welcomeModal = document.getElementById('welcomeModal');
-                welcomeModal.style.display = 'flex';
-                
-                // Hide welcome modal after 3 seconds and show main page
-                setTimeout(() => {
-                    welcomeModal.style.display = 'none';
-                    document.getElementById('mainPage').style.display = 'block';
-                }, 3000);
-            } else {
-                // Wrong password
-                errorMessage.textContent = 'MALI PO ATEEEE, DOON KA SA FAR AWAY. THIS PAGE IS NOT FOR YOU HIHI';
-                errorMessage.classList.remove('hidden');
-                document.getElementById('passwordInput').value = '';
-                
-                // Shake animation for error
-                errorMessage.style.animation = 'shake 0.5s';
-                setTimeout(() => {
-                    errorMessage.style.animation = '';
-                }, 500);
-            }
-        }
-
-        // Allow Enter key to submit password
-        document.getElementById('passwordInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
-        });
-
-        function showModule(moduleName) {
-            // Hide module selection
-            document.getElementById('moduleSelection').style.display = 'none';
-            
-            // Show selected module
-            document.getElementById(moduleName + 'Module').style.display = 'block';
-            
-            // If flower module, draw the flower
-            if (moduleName === 'flower') {
-                drawSpiderLilyBouquet();
-            }
-        }
-
-        function backToModules() {
-            // Hide all modules
-            document.querySelectorAll('.module-content').forEach(module => {
-                module.style.display = 'none';
-            });
-            
-            // Show module selection
-            document.getElementById('moduleSelection').style.display = 'grid';
-        }
-
-        function drawSpiderLilyBouquet() {
-            const canvas = document.getElementById('flowerCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Background
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, '#FFF0F5');
-            gradient.addColorStop(1, '#FFE4E1');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw spider lilies
-            drawSpiderLily(ctx, 150, 200, 1.2, -0.2);
-            drawSpiderLily(ctx, 250, 180, 1.0, 0.1);
-            drawSpiderLily(ctx, 350, 210, 1.1, -0.15);
-            drawSpiderLily(ctx, 200, 280, 0.9, 0.2);
-            drawSpiderLily(ctx, 300, 270, 1.0, -0.1);
-            
-            // Draw stems
-            ctx.strokeStyle = '#90EE90';
-            ctx.lineWidth = 4;
-            
-            for (let i = 0; i < 5; i++) {
-                const x = 180 + i * 40;
-                ctx.beginPath();
-                ctx.moveTo(x, 350);
-                ctx.quadraticCurveTo(x - 20, 450, x - 10, 580);
-                ctx.stroke();
-            }
-            
-            // Draw ribbon bow
-            drawBow(ctx, 250, 500);
-            
-            // Add decorative elements
-            ctx.fillStyle = 'rgba(255, 182, 193, 0.3)';
-            for (let i = 0; i < 30; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const size = Math.random() * 3 + 1;
-                ctx.beginPath();
-                ctx.arc(x, y, size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function drawSpiderLily(ctx, x, y, scale, rotation) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate(rotation);
-            ctx.scale(scale, scale);
-            
-            // Draw petals (spider lily characteristic long curved petals)
-            const petalCount = 6;
-            for (let i = 0; i < petalCount; i++) {
-                ctx.save();
-                ctx.rotate((Math.PI * 2 * i) / petalCount);
-                
-                // Petal gradient
-                const gradient = ctx.createLinearGradient(0, -60, 0, 0);
-                gradient.addColorStop(0, '#FFB6C1');
-                gradient.addColorStop(0.5, '#FF69B4');
-                gradient.addColorStop(1, '#FF1493');
-                ctx.fillStyle = gradient;
-                
-                // Draw curved petal
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.bezierCurveTo(-8, -30, -5, -50, 0, -70);
-                ctx.bezierCurveTo(5, -50, 8, -30, 0, 0);
-                ctx.fill();
-                
-                // Petal outline
-                ctx.strokeStyle = '#FF1493';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                
-                // Stamens (characteristic long stamens)
-                ctx.strokeStyle = '#FFD700';
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(0, -10);
-                ctx.lineTo(0, -85);
-                ctx.stroke();
-                
-                // Anther
-                ctx.fillStyle = '#FFA500';
-                ctx.beginPath();
-                ctx.arc(0, -85, 3, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.restore();
-            }
-            
-            // Center of flower
-            const centerGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 15);
-            centerGradient.addColorStop(0, '#FFE4E1');
-            centerGradient.addColorStop(1, '#FFB6C1');
-            ctx.fillStyle = centerGradient;
-            ctx.beginPath();
-            ctx.arc(0, 0, 15, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.restore();
-        }
-
-        function drawBow(ctx, x, y) {
-            ctx.fillStyle = '#FF69B4';
-            
-            // Left loop
-            ctx.beginPath();
-            ctx.arc(x - 30, y, 25, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Right loop
-            ctx.beginPath();
-            ctx.arc(x + 30, y, 25, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Center knot
-            ctx.beginPath();
-            ctx.arc(x, y, 15, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Ribbon tails
-            ctx.beginPath();
-            ctx.moveTo(x - 10, y + 10);
-            ctx.lineTo(x - 20, y + 60);
-            ctx.lineTo(x - 5, y + 55);
-            ctx.lineTo(x, y + 10);
-            ctx.fill();
-            
-            ctx.beginPath();
-            ctx.moveTo(x + 10, y + 10);
-            ctx.lineTo(x + 20, y + 60);
-            ctx.lineTo(x + 5, y + 55);
-            ctx.lineTo(x, y + 10);
-            ctx.fill();
-        }
-
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+    document.getElementById('numpad').addEventListener('click', e => {
+      const n = e.target.closest('[data-n]')?.dataset.n;
+      if (!n) return;
+      n === 'del' ? del() : push(n);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key >= '0' && e.key <= '9') push(e.key);
+      if (e.key === 'Backspace') del();
+    });
+  </script>
 </body>
 </html>
